@@ -1,0 +1,300 @@
+<html>
+{% load static %}
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>ShopIndai</title>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet"> <!-- range slider -->
+
+
+  <!-- font awesome style -->
+  <!-- <link href="../css/font-awesome.min.css" rel="stylesheet" /> -->
+
+  <link href="{% static 'css/order.css'%}" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="{% static 'css/responsive.css'%}" rel="stylesheet" />
+
+  </head>
+  <body>
+    <header>
+
+      <div class="container-fluid">
+        <div class="row">
+
+          <div class="col-md-6 blok">
+            <ul class="phone">
+              <li>
+                <a href="#"><i class="fa fa-phone"></i>+91183872657</a>
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-envelope"></i>ShopIndai37848@gamil.com</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+                <ul class="reg">
+                  {% if user.is_authenticated %}
+                    <li>
+                    <a href="{% url 'logout' %}">logout</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'show'%}">Cart</a>
+                  </li>
+                  {% else %}
+                  <li>
+                  <a href="{% url 'login' %}">login</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'register' %}">registion</a>
+                  </li>
+                  {% endif %}
+                </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </header>
+
+
+    <nav class="navbar navbar-expand-lg  navbar-light nav-col">
+
+
+
+
+
+      <a class="navbar-brand" href="{% url 'index'%}">ShopIndai</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'index'%}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'product'%}">Man</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'woman'%}">Woman</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'kid'%}">kidds</a>
+          </li
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'elect' %}">Electroic</a>
+          </li>
+          <li class="nav-item">
+            {% if user.is_authenticated %}
+                    
+                    <a class="nav-link" href="{% url 'profile' %}">profile</a>
+                  
+                  
+                  
+                  {% endif %}
+          </li> 
+          <li class="nav-item">
+            {% if user.is_authenticated %}
+                    
+                    <a class="nav-link" href="{% url 'ordershow' %}">Order</a>
+                  
+                  
+                  
+                  {% endif %} 
+          <li class="nav-item">
+            <a class="nav-link " href="#">Contect
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+
+
+
+
+<section>
+<div class="container mt-5">
+       <h3>Order Summary</h3>
+   <div class="row mb-4">
+      <div class="col-md-5 ">
+         <h4> Product : {{product.title}}</h4>
+         <h5> Catagery :{{product.coteg}}</h5>
+          <b>Price : {{product.sell_pr}}</b>
+
+
+      </div>
+
+
+
+
+
+
+
+      <div class="col-md-5  mt-3 ml-3">
+        <h2>{{cart.name}}</h2>
+        <div class="row">
+
+
+
+
+  <div class="dev ">
+      <ul>
+
+
+      <li>
+       Mobile Number
+        </li>
+        <li>
+         Vill
+          </li>
+          
+            <li>
+               City
+              </li>
+              <li>
+              State
+                </li>
+                <li>
+                Pincode
+                  </li>
+                  </ul>
+
+
+
+  </div>
+
+  <div class="dev">
+
+
+                  <ul>
+
+
+                  <li>
+                    {{cart.phone}}
+                    </li>
+                    <li>
+                   {{cart.locality}}
+                      </li>
+                      <li>
+                        {{cart.city}}
+                        </li>
+                        <li>
+                        {{cart.state}}
+                          </li>
+                          <li>
+                           {{cart.pincode}}
+                            </li>
+                            
+                              </ul>
+                              </div>
+
+  </div>
+     <form action="/trak/{{product.title}}" method="POST" class="mt-3">
+                            {% csrf_token %}
+                            <input type="hidden" name="pro_id"  value={{product.id}} >
+                            <input type="hidden" name="pro_id2"  value={{cart.id}} >
+                            <button type="submit" style="background-color:green;margin-left:20px;  text-decoration: none;  padding:10px;border-radius:10px; float:left;">Order Now</button>
+    </form>
+     <form action="/updata/{{cart.id}}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="pro_id"  value={{product.id}} >
+                            <button type="submit" style="background-color:red;margin-left:20px;  text-decoration: none;  padding:10px;border-radius:10px; ">Change Address</button>
+    </form>
+      </div>
+     </div>
+   </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer class="colr">
+     <div class="container py-5">
+       <div class="row py-4">
+
+         <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+           <h3 class="font-weight-bold">ShopIndai</h3>
+           <p class="font-italic text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+           <ul class="list-inline mt-4">
+             <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></li>
+             <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></li>
+             <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i class="fa fa-instagram"></i></a></li>
+             <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i class="fa fa-pinterest"></i></a></li>
+             <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i class="fa fa-vimeo"></i></a></li>
+           </ul>
+         </div>
+         <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+           <h6 class="text-uppercase font-weight-bold mb-4">Shop</h6>
+           <ul class="list-unstyled mb-0">
+             <li class="mb-2"><a href="#" class="text-muted">For Women</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">For Men</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Stores</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Our Blog</a></li>
+           </ul>
+         </div>
+         <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+           <h6 class="text-uppercase font-weight-bold mb-4">Company</h6>
+           <ul class="list-unstyled mb-0">
+             <li class="mb-2"><a href="#" class="text-muted">Login</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Register</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Wishlist</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Our Products</a></li>
+           </ul>
+         </div>
+         <div class="col-lg-4 col-md-6 mb-lg-0">
+           <h6 class="text-uppercase font-weight-bold mb-4">Payment</h6>
+           <ul class="list-unstyled mb-0">
+             <li class="mb-2"><a href="#" class="text-muted">Google</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Paypal</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Card</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Netbanking</a></li>
+           </ul>
+         </div>
+       </div>
+     </div>
+
+     <!-- Copyrights -->
+     <div class="bg-light py-4">
+       <div class="container text-center">
+         <p class="text-muted mb-0 py-2">@Copyrights 2021</@></p>
+       </div>
+     </div>
+   </footer>
+
+
+
+
+<script src="{% static 'javascript/jquery-3.4.1.min.js'%}"></script>
+    <!-- bootstrap js -->
+    <script src="{% static 'javascript/bootstrap.js'%}"></script>
+    <!-- custom js -->
+  </body>
+
+    </html>

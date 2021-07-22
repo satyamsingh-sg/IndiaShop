@@ -1,0 +1,76 @@
+body{
+  margin: 0;
+  padding:0;
+  font-family: 'Nunito', sans-serif;
+}
+/* header */
+header{
+  padding: 20px;
+  background-color: black;
+
+}
+header a{
+  color: white;
+  text-decoration: none;
+}
+.phone li{
+  display: inline-block;
+  float: left;
+  margin-right:50px;
+}
+.reg li{
+  display: inline-block;
+  float: right;
+  margin-left:50px;
+}
+
+/* navbar */
+
+.nav-col{
+  background-color: #F0F00F ;
+  font-size: 20px;
+  padding: 20px;
+}
+.nav-item{
+  margin-right: 20px;
+}
+.navbar-brand{
+  font-size: 50px;
+}
+
+
+/* profile */
+
+.pro ul {
+ list-style-type: none;
+}
+.pro ul li{
+  margin-top: 30px;
+
+}
+.pro ul li a{
+text-decoration: none;
+color: black;
+
+
+}
+
+.dev ul {
+list-style-type: none;
+}
+.dev ul li{
+    margin-top: 30px;
+}
+h4{
+justify-content: center;
+
+}
+
+
+
+
+/* footer part */
+.colr{
+  background-color: black;
+  color:white;
+}

@@ -1,0 +1,361 @@
+<html>
+{% load static %}
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>ShopIndai</title>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet"> <!-- range slider -->
+
+
+  <!-- font awesome style -->
+  <!-- <link href="../css/font-awesome.min.css" rel="stylesheet" /> -->
+
+  <link href="{% static 'css/tral.css'%}" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="{% static 'css/responsive.css'%}" rel="stylesheet" />
+
+  </head>
+  <body>
+    <header>
+
+      <div class="container-fluid">
+        <div class="row">
+
+          <div class="col-md-6 blok">
+            <ul class="phone">
+              <li>
+                <a href="#"><i class="fa fa-phone"></i>+91183872657</a>
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-envelope"></i>ShopIndai37848@gamil.com</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+                <ul class="reg">
+                  {% if user.is_authenticated %}
+                    <li>
+                    <a href="{% url 'logout' %}">logout</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'show'%}">Cart</a>
+                  </li>
+                  {% else %}
+                  <li>
+                  <a href="{% url 'login' %}">login</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'register' %}">registion</a>
+                  </li>
+                  {% endif %}
+                </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </header>
+
+
+    <nav class="navbar navbar-expand-lg  navbar-light nav-col">
+
+
+
+
+
+      <a class="navbar-brand" href="{% url 'index'%}">ShopIndai</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'index'%}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'product'%}">Man</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'woman'%}">Woman</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'kid'%}">kidds</a>
+          </li
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'elect' %}">Electroic</a>
+          </li>
+          <li class="nav-item">
+            {% if user.is_authenticated %}
+                    
+                    <a class="nav-link" href="{% url 'profile' %}">profile</a>
+                  
+                  
+                  
+                  {% endif %}
+          </li>  
+          <li class="nav-item">
+            {% if user.is_authenticated %}
+                    
+                    <a class="nav-link" href="{% url 'ordershow' %}">Order</a>
+                  
+                  
+                  
+                  {% endif %}
+          <li class="nav-item">
+            <a class="nav-link " href="#">Contect
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
+
+<section>
+{% for p in order%}
+  <div class="container padding-bottom-3x mb-1 ">
+          <div class=" row card mb-3">
+            <div class="p-4 text-center text-white text-lg bg-dark rounded-top"><span class="text-uppercase">Tracking Order No - </span><span class="text-medium">{{p.id}}</span></div>
+            <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
+              <div class="w-100 text-center py-1 px-2"><span class="text-medium">Shipped Via:</span> {{p.product.title}} </div>
+              <div class="w-100 text-center py-1 px-2"><span class="text-medium">Status:</span> {{p.deliver}}</div>
+              <div class="w-100 text-center py-1 px-2"><span class="text-medium">Order Date:</span> {{p.date}}</div>
+              <div class="w-100 text-center py-1 px-2"><span class="text-medium">Expected Date:</span> {{p.exp}}</div>
+            </div>
+            <div class="row box">
+              <div class="col-md-12">
+                <div class="boxe">
+                  <ul class="">
+                  {% if p.deliver == "Confirmed" %}
+                    <li>
+                         <div class="cirle">
+
+                         </div>
+                    </li>
+                    <li>
+                      <div class="cirle bg-white" >
+
+                      </div>
+                    </li>
+                    <li>
+                      <div class="cirle  bg-white" >
+
+                      </div>
+                    </li>
+                    <li>
+                      <div class="cirle  bg-white" >
+
+                      </div>
+                    </li>
+                    {% elif p.deliver == "Packed" %}
+                    <li>
+                         <div class="cirle">
+
+                         </div>
+                    </li>
+                    <li>
+                      <div class="cirle " >
+
+                      </div>
+                    </li>
+                    <li>
+                      <div class="cirle  bg-white" >
+
+                      </div>
+                    </li>
+                    <li>
+                      <div class="cirle  bg-white" >
+
+                      </div>
+                    </li>
+                    {% elif p.deliver == "courier" %}
+                    <li>
+                         <div class="cirle">
+
+                         </div>
+                    </li>
+                    <li>
+                      <div class="cirle" >
+
+                      </div>
+                    </li>
+                    <li>
+                      <div class="cirle" >
+
+                      </div>
+                    </li>
+                    <li>
+                      <div class="cirle  bg-white" >
+
+                      </div>
+                    </li>
+                    {% elif p.deliver == "picked_up"%}
+                    <li>
+                         <div class="cirle">
+
+                         </div>
+                    </li>
+                    <li>
+                      <div class="cirle " >
+
+                      </div>
+                    </li>
+                    <li>
+                      <div class="cirle " >
+
+                      </div>
+                    </li>
+                    <li>
+                      <div class="cirle " >
+
+                      </div>
+                    </li>
+                      {% endif %}
+                  </ul>
+
+                </div>
+                {% if p.deliver == "Confirmed"%}
+                <div class="progress" style="height: 20px;">
+                <div class="progress-bar" role="progressbar" style="width: 20%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                {% elif p.deliver == "Packed"%}
+                <div class="progress" style="height: 20px;">
+                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                {% elif p.deliver == "courier"%}
+                <div class="progress" style="height: 20px;">
+                <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                {% elif p.deliver == "picked_up"%}
+                <div class="progress" style="height: 20px;">
+                <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                 {% endif %}
+              </div>
+
+
+            </div>
+            <div class="row mb-5">
+               <div class="col-md-12  boxe">
+                 <ul class="">
+                   <li>
+
+                   </li>
+                   <li class="ml-3" style="padding-right:20px;">
+
+                        <b>Confirmed</b>
+                   </li>
+                   <li style="padding-right:70px;">
+                          <b>Packed</b>
+                   </li>
+                   <li >
+                          <b> courier</b>
+                   </li>
+                   <li>
+                          <b>Delivered</b>
+                   </li>
+                 
+                 </ul>
+               </div>
+
+            </div>
+
+          </div>
+          <div class=" mt-5 cow d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-sm-between align-items-center">
+            <div class="custom-control custom-checkbox mr-3">
+              <input class="custom-control-input" type="checkbox" id="notify_me" checked="">
+              <label class="custom-control-label" for="notify_me">Notify me when order is delivered</label>
+            </div>
+            <div class="text-left text-sm-right"><a class="btn btn-outline-primary btn-rounded btn-sm" href="orderDetails" data-toggle="modal" data-target="#orderDetails">View Order Details</a></div>
+          </div>
+        </div>
+        {% endfor %}
+</section>
+
+
+
+
+
+
+
+
+
+
+    <footer class="colr">
+     <div class="container py-5">
+       <div class="row py-4">
+
+         <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+           <h3 class="font-weight-bold">ShopIndai</h3>
+           <p class="font-italic text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+           <ul class="list-inline mt-4">
+             <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></li>
+             <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></li>
+             <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i class="fa fa-instagram"></i></a></li>
+             <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i class="fa fa-pinterest"></i></a></li>
+             <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i class="fa fa-vimeo"></i></a></li>
+           </ul>
+         </div>
+         <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+           <h6 class="text-uppercase font-weight-bold mb-4">Shop</h6>
+           <ul class="list-unstyled mb-0">
+             <li class="mb-2"><a href="#" class="text-muted">For Women</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">For Men</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Stores</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Our Blog</a></li>
+           </ul>
+         </div>
+         <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+           <h6 class="text-uppercase font-weight-bold mb-4">Company</h6>
+           <ul class="list-unstyled mb-0">
+             <li class="mb-2"><a href="#" class="text-muted">Login</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Register</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Wishlist</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Our Products</a></li>
+           </ul>
+         </div>
+         <div class="col-lg-4 col-md-6 mb-lg-0">
+           <h6 class="text-uppercase font-weight-bold mb-4">Payment</h6>
+           <ul class="list-unstyled mb-0">
+             <li class="mb-2"><a href="#" class="text-muted">Google</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Paypal</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Card</a></li>
+             <li class="mb-2"><a href="#" class="text-muted">Netbanking</a></li>
+           </ul>
+         </div>
+       </div>
+     </div>
+
+     <!-- Copyrights -->
+     <div class="bg-light py-4">
+       <div class="container text-center">
+         <p class="text-muted mb-0 py-2">@Copyrights 2021</@></p>
+       </div>
+     </div>
+   </footer>
+
+
+
+
+<script src="{% static 'javascript/jquery-3.4.1.min.js'%}"></script>
+    <!-- bootstrap js -->
+    <script src="{% static 'javascript/bootstrap.js'%}"></script>
+    <!-- custom js -->
+  </body>
+
+    </html>

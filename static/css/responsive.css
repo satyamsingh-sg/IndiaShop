@@ -1,0 +1,16 @@
+@media (max-width: 767px) {
+
+
+.blok{
+  visibility: hidden;
+}
+.reg {
+  margin-left: 100px;
+}
+}
+@media (max-width: 575px) {
+
+.carousel img{
+    height: 200px;
+}
+}
